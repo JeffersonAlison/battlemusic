@@ -1,31 +1,35 @@
-<%= form_for(devise_resource, :as => devise_resource_name, :html => {:id => 'register_form'}, :url => user_registration_path, :remote => :true, :format => :json) do |f| %>
-
-    <div class="name_input_container">
-        <div class="name_input_cell">
-            <%= f.text_field :first_name, :autofocus => true, :class => 'first_name', :placeholder => 'first name' %>
-            <div class="error"><%= devise_resource.errors[:first_name].first if devise_resource.errors[:first_name].present? %></div>
+<%= form_for(resource, :as => resource_name, :url => registration_path(resource_name), :html => {:class=>"form-signin"}) do |f| %>
+    <h2 class="form-signin-heading">Cadastre-se</h2>
+    <%= devise_error_messages! %>
+    <div class="login-wrap">
+        <p>Dados pessoais</p>
+        <%= f.text_field :name, :class => "form-control", :placeholder => "Nome Completo", :autofocus => true %>
+        <%= f.text_field :email, :class => "form-control", :placeholder => "Email", :autofocus => true %>
+        <%= f.date_select :date_birth, :class => "form-control", :autofocus => true %>
+        <%= f.text_field :facebook, :class => "form-control", :placeholder => "Facebook", :autofocus => true  %>
+        <%= f.text_field :twitter, :class => "form-control", :placeholder => "Twitter", :autofocus => true  %>
+        <div class="radios">
+            <label class="label_radio col-lg-6 col-sm-6" for="radio-01">
+                <input name="sample-radio" id="radio-01" value="1" type="radio" checked /> Male
+            </label>
+            <label class="label_radio col-lg-6 col-sm-6" for="radio-02">
+                <input name="sample-radio" id="radio-02" value="1" type="radio" /> Female
+            </label>
         </div>
 
-        <div class="name_input_cell_right">
-            <%= f.text_field :last_name, :class => 'last_name', :placeholder => 'last name' %>
-            <div class="error"><%= devise_resource.errors[:last_name].first if devise_resource.errors[:last_name].present? %></div>
+        <p>Dados da conta</p>
+        <%= f.text_field :login, :class => "form-control", :placeholder => "Usúario", :autofocus => true %>
+        <%= f.password_field :password, :class => "form-control", :placeholder => "Senha" %>
+        <%= f.password_field :password_confirmation, :class => "form-control", :placeholder => "Confirmar Senha" %>
+
+        <label class="checkbox">
+            <%= f.check_box :visible_data %> Dados visiveis?
+        </label>
+        <button class="btn btn-lg btn-login btn-block" type="submit">Cadastrar</button>
+
+        <div class="registration">
+            <%= render :partial => "devise/shared/links" %>
         </div>
+
     </div>
-
-    <%= f.email_field :email, :placeholder => "email" %>
-    <div class="error"><%= devise_resource.errors[:email].first if devise_resource.errors[:email].present? %></div>
-
-    <%= f.password_field :password, :placeholder => "password", :title => "8+ characters" %>
-    <div class="error"><%= devise_resource.errors[:password].first if devise_resource.errors[:password].present? %></div>
-
-    <%= f.password_field :password_confirmation, :placeholder => "confirm password" %>
-    <div class="error"><%= devise_resource.errors[:password_confirmation].first if devise_resource.errors[:password_confirmation].present? %></div>
-
-    <div class="option_buttons">
-        <div class="already_registered">
-            <%= link_to 'already registered?', '#', :class => 'already_registered', :id => 'already_registered', :view => 'login' %>
-        </div>
-        <%= image_submit_tag('modals/account/register_submit.png', :class => 'go') %>
-        <div class="clear"></div>
-    </div>
-<% end %>
+<%end%>
