@@ -5,7 +5,7 @@ Battlemusics::Application.routes.draw do
   resources :tools
 
 
-  devise_for :users, :path => 'usuarios', :path_names => {:sign_in => 'logar', :sign_out => 'sair', :sign_up => 'cadastrar'}
+  devise_for :users
 
   root :to => 'site#home'
   # The priority is based upon order of creation:
